@@ -1,0 +1,66 @@
+/* ================================================= */
+/* CAMBIO: BASE MÁS ROBUSTA PARA EVITAR SCROLL       */
+/* ================================================= */
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* La clave para eliminar las barras de scroll */
+    background-color: #000;
+}
+
+/* El body ya no necesita flexbox ni altura específica */
+body {
+    position: relative; /* Contexto para el botón posicionado absolutamente */
+}
+
+/* ================================================= */
+/* CAMBIO: POSICIONAR EL CANVAS COMO UN FONDO FIJO   */
+/* ================================================= */
+#fireworksCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    background-color: #0a0a1a;
+}
+
+/* Estilo del botón (mantenemos el estilo mejorado anterior) */
+#restartButton {
+    position: absolute;
+    z-index: 10; /* Aseguramos que el botón esté sobre el canvas */
+    top: 20px;
+    right: 20px;
+    padding: 12px 25px;
+    background-color: #2c3e50;
+    color: #ecf0f1;
+    border: 2px solid #3498db;
+    border-radius: 50px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 0 10px rgba(52, 152, 219, 0.5),
+    0 0 20px rgba(52, 152, 219, 0.3);
+    transition: all 0.3s ease-in-out;
+}
+
+#restartButton:hover {
+    background-color: #3498db;
+    color: #fff;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.8),
+    0 0 30px rgba(52, 152, 219, 0.5);
+}
+
+/* Ajuste responsivo para pantallas pequeñas */
+@media (max-width: 480px) {
+    #restartButton {
+        top: 15px;
+        right: 15px;
+        padding: 10px 18px;
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,202 @@
+body {
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-family: 'Arial', sans-serif;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    transition: background-color 0.5s ease-in-out;
+}
+
+.text-container {
+    text-align: center;
+    padding-top: 10vh;
+    position: relative;
+    z-index: 10;
+    transition: color 0.5s ease-in-out;
+}
+
+h1 {
+    font-size: 3em;
+    margin-bottom: 0.2em;
+    font-weight: bold;
+}
+
+p {
+    font-size: 1.2em;
+    color: #cccccc;
+}
+
+#spiderWebCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+#controls {
+    position: fixed;
+    top: 20px;
+    /* Keeps it aligned to the right, even when hidden */
+    right: 20px;
+    background-color: rgba(50, 50, 50, 0.95); /* Slightly less transparent */
+    padding: 15px;
+    border-radius: 8px;
+    z-index: 100;
+    color: #f0f0f0;
+    font-size: 0.9em;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    transition: transform 0.3s ease-in-out;
+    width: 200px; /* Explicit width for calculation */
+    box-sizing: border-box; /* Include padding in width */
+}
+
+.controls-hidden {
+    /* Pushes the entire controls panel off-screen to the right */
+    transform: translateX(calc(100% + 20px));
+}
+
+#toggleControls {
+    position: fixed;
+    top: 20px;
+    right: 20px; /* Always visible on the right edge */
+    z-index: 101; /* Ensure it's above the controls menu */
+    background-color: #555; /* Darker grey for better contrast */
+    color: #fff; /* White gear icon */
+    border: 1px solid #777; /* Slight border for definition */
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.5em;
+    line-height: 1;
+    transition: right 0.3s ease-in-out, background-color 0.2s; /* Add background transition */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3); /* Add a subtle shadow */
+}
+
+#toggleControls:hover {
+    background-color: #666; /* Slightly lighter on hover */
+}
+
+#toggleControls.active {
+    /* When active, move it to the left of the opened menu */
+    /* Calculation: (width of #controls) + (right padding of #controls) + (margin/gap) */
+    right: calc(200px + 20px + 10px); /* Adjust based on #controls width + some gap */
+}
+
+#controls h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    border-bottom: 1px solid #666;
+    padding-bottom: 5px;
+}
+
+#controls div {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#controls label {
+    margin-right: 10px;
+}
+
+#controls input[type="color"] {
+    width: 40px;
+    height: 20px;
+    border: 1px solid #777;
+    padding: 0;
+    cursor: pointer;
+}
+#controls input[type="color"]::-webkit-color-swatch-wrapper {
+    padding: 0;
+}
+#controls input[type="color"]::-webkit-color-swatch {
+    border: none;
+    border-radius: 3px;
+}
+
+#controls input[type="number"] {
+    width: 60px;
+    padding: 3px;
+    background-color: #333;
+    color: #f0f0f0;
+    border: 1px solid #777;
+    border-radius: 3px;
+}
+
+#controls button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 0.9em;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 5px;
+}
+
+#controls button:hover {
+    background-color: #45a049;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #controls {
+        width: 250px; /* Fixed width for better control */
+        right: 0; /* Align to the right edge */
+        transform: translateX(100%); /* Hidden by default, off-screen right */
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+    #controls:not(.controls-hidden) {
+        transform: translateX(0); /* Visible state, slides in */
+    }
+
+    #toggleControls {
+        right: 20px; /* Always on the right edge */
+    }
+    #toggleControls.active {
+        /* Pushes the toggle button to the left when the menu is open */
+        right: calc(250px + 30px); /* (width of #controls) + (some gap) */
+    }
+    h1 {
+        font-size: 2.2em;
+    }
+    p {
+        font-size: 1em;
+    }
+}
+
+@media (max-width: 480px) {
+    #controls {
+        width: 90%; /* Wider for very small screens */
+        padding: 10px;
+        font-size: 0.8em;
+        right: 0;
+        transform: translateX(100%);
+    }
+    #controls input[type="number"] {
+        width: 50px;
+    }
+    #toggleControls.active {
+        right: calc(90% + 25px); /* Adjusted for wider controls */
+    }
+    h1 {
+        font-size: 1.8em;
+    }
+    p {
+        font-size: 0.9em;
+    }
+}

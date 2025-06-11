@@ -1,0 +1,13 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background-color: #050510; /* Un fondo oscuro casi negro */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+canvas {
+    display: block;
+}

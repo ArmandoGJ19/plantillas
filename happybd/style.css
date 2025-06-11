@@ -1,0 +1,54 @@
+body {
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    /* MODIFICAR: Color de fondo de la página */
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+}
+
+.birthday-container {
+    text-align: center;
+    z-index: 10;
+    /* MODIFICAR: Color de fondo del recuadro del texto */
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: clamp(20px, 5vw, 40px) clamp(25px, 6vw, 60px);
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    max-width: 90%;
+}
+
+.birthday-text {
+    font-weight: bold;
+    /* MODIFICAR: Color del texto principal */
+    color: #e91e63;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    /* MODIFICAR: Velocidad de la animación de pulso (2s = 2 segundos) */
+    animation: pulse 2s infinite;
+    font-size: clamp(2.2rem, 8vw, 4.5rem);
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}

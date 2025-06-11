@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Corazón de Partículas Interactivo con Nombre</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="menu-toggle" id="menuToggle">
+  ☰
+</div>
+<div class="controls" id="controlsMenu">
+  <label for="name-input">Nombre:</label>
+  <input type="text" id="name-input" value="Amor">
+
+  <label for="text-color-select">Color Texto:</label>
+  <select id="text-color-select">
+    <option value="#dcdcdc">Blanco</option>
+    <option value="#ff0000">Rojo</option>
+    <option value="#00ff00">Verde</option>
+    <option value="#0000ff">Azul</option>
+    <option value="#ffff00">Amarillo</option>
+    <option value="#ff00ff">Magenta</option>
+    <option value="#00ffff">Cyan</option>
+  </select>
+
+  <label for="font-size">Tamaño Texto Base: <span id="font-size-value">40</span></label>
+  <input type="range" id="font-size" min="20" max="80" value="40">
+
+  <label for="pulse-amplitude">Amplitud Pulso Texto: <span id="pulse-amplitude-value">10</span></label>
+  <input type="range" id="pulse-amplitude" min="0" max="30" value="10">
+
+  <label for="pulse-speed">Velocidad Pulso Texto: <span id="pulse-speed-value">0.005</span></label>
+  <input type="range" id="pulse-speed" min="0.001" max="0.02" value="0.005" step="0.001">
+
+  <hr style="margin: 10px 0;">
+
+  <label for="color-select">Color Partículas:</label>
+  <select id="color-select">
+    <option value="#ff007f">Rosa Fuerte</option>
+    <option value="#00ff00">Verde</option>
+    <option value="#ff0000">Rojo</option>
+    <option value="#0000ff">Azul</option>
+    <option value="#ffff00">Amarillo</option>
+    <option value="#ff00ff">Magenta</option>
+    <option value="#00ffff">Cyan</option>
+    <option value="#ffffff">Blanco</option>
+  </select>
+
+  <label for="particle-size">Tamaño Partículas: <span id="particle-size-value">3</span></label>
+  <input type="range" id="particle-size" min="1" max="10" value="3">
+
+  <label for="num-particles">Nº Partículas: <span id="num-particles-value">200</span></label>
+  <input type="range" id="num-particles" min="50" max="500" value="200" step="10">
+
+  <label for="speed">Velocidad Partículas: <span id="speed-value">0.05</span></label>
+  <input type="range" id="speed" min="0.01" max="0.2" value="0.05" step="0.01">
+
+  <label for="mouse-follow">Influencia Mouse: <span id="mouse-follow-value">80</span></label>
+  <input type="range" id="mouse-follow" min="10" max="200" value="80">
+
+  <label for="trail-alpha">Estela Partículas: <span id="trail-alpha-value">0.1</span></label>
+  <input type="range" id="trail-alpha" min="0.01" max="0.5" value="0.1" step="0.01">
+</div>
+
+<canvas id="particleCanvas"></canvas>
+
+<script src="script.js"></script>
+</body>
+</html>

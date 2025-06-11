@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Pacifico&display=swap');
+
+body {
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+}
+
+.animated-gradient {
+    /* MODIFICAR: Colores del fondo degradado animado. */
+    background: linear-gradient(270deg, #ff9a9e, #fad0c4, #fad0c4, #ff9a9e);
+    background-size: 400% 400%;
+    /* MODIFICAR: Velocidad de la animación del fondo (15s = 15 segundos). */
+    animation: gradientAnimation 15s ease infinite;
+}
+@keyframes gradientAnimation {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.card {
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+}
+
+.btn-yes {
+    transition: all 0.3s ease;
+}
+
+.btn-yes:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+}
+
+.btn-no {
+    position: absolute;
+    /* MODIFICAR: Velocidad con la que el botón "No" se mueve. */
+    transition: all 0.1s ease-out;
+}
+
+.confetti-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 9999;
+}
+
+.confetti {
+    position: absolute;
+    /* MODIFICAR: Tamaño del confeti. */
+    width: 10px;
+    height: 10px;
+    background-color: #f00;
+    opacity: 0;
+    animation: fall 3s forwards;
+    border-radius: 50%;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-100px) rotateZ(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100vh) rotateZ(720deg);
+        opacity: 0;
+    }
+}
+
+.typewriter-cursor {
+    display: inline-block;
+    animation: blink-caret 0.75s step-end infinite;
+    color: white;
+}
+
+@keyframes blink-caret {
+    from, to { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+#proposalHeading {
+    min-height: 1.2em;
+    line-height: 1.2;
+}
+
+.sobre {
+    /* MODIFICAR: Color del cuerpo del sobre. */
+    background: #feeef3;
+    width: 300px;
+    height: 180px;
+    position: relative;
+    cursor: pointer;
+}
+
+.triangulo {
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    /* MODIFICAR: Color de la solapa superior del sobre. */
+    border-top: 95px solid #fbbbce;
+    transition: transform .75s;
+    transform-origin: top;
+}
+.abrir {
+    transform: rotatex(180deg);
+}
+.triangulo2 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 150px solid transparent;
+    border-right: 150px solid transparent;
+    border-bottom: 95px solid #feeef3;
+}
+.triangulo3 {
+    position: absolute;
+    top: 180px;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 90px solid transparent;
+    border-right: 90px solid transparent;
+    border-top: 143px solid #fcccda;
+    transform: rotate(-90deg);
+    transform-origin: top left;
+}
+.triangulo4 {
+    position: absolute;
+    top: 180px;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-left: 90px solid transparent;
+    border-right: 90px solid transparent;
+    border-top: 143px solid #fcccda;
+    transform: rotate(90deg);
+    transform-origin: top right;
+}
+
+.heart {
+    width: 150px;
+    height: 150px;
+    /* MODIFICAR: Color del corazón que sale de la carta. */
+    background-color: #e62e5d;
+    position: absolute;
+    top: 75px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-45deg);
+    transition: all 0.7s ease-in-out;
+    opacity: 0;
+    z-index: -1;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    /* MODIFICAR: Color de las partes redondeadas del corazón (debe ser el mismo). */
+    background-color: #e62e5d;
+    border-radius: 50%;
+}
+.heart::before {
+    top: -75px;
+    left: 0;
+}
+.heart::after {
+    top: 0;
+    left: 75px;
+}
+
+.heart-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    /* MODIFICAR: Color del texto dentro del corazón. */
+    color: white;
+    /* MODIFICAR: Tamaño del texto dentro del corazón. */
+    font-size: 22px;
+    font-weight: bold;
+    text-align: center;
+    width: 120%;
+    z-index: 1;
+}
+
+.floating-heart {
+    position: fixed;
+    /* MODIFICAR: Color de los corazones que aparecen al hacer clic. */
+    color: #e62e5d;
+    /* MODIFICAR: Tamaño de los corazones que aparecen al hacer clic. */
+    font-size: 24px;
+
+    pointer-events: none;
+
+    transform: translate(-50%, -50%);
+    /* MODIFICAR: Duración de la animación del corazón flotante (2s = 2 segundos). */
+    animation: floatUpAndFade 2s ease-out forwards;
+    z-index: 9998;
+}
+
+@keyframes floatUpAndFade {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -150px) scale(1.5);
+    }
+}

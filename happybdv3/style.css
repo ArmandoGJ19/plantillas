@@ -1,0 +1,131 @@
+body {
+    margin: 0;
+    overflow: hidden;
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative; /* Para posicionar las estrellas */
+    font-family: 'Arial', cursive, sans-serif; /* Moved font-family here for global consistency */
+}
+
+.fireworks-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Para que no interfiera con otros elementos si los hubiera */
+}
+
+.particle {
+    position: absolute;
+    background-color: #fff; /* Color base, se cambiará con JS */
+    border-radius: 50%;
+    opacity: 1;
+    transform-origin: center center;
+    /* Removed animation: explode here as it's handled by JS for more control */
+}
+
+/* @keyframes explode is no longer strictly needed if particle movement is fully JS controlled */
+/* But it's good to keep if you ever revert to CSS only particle animation */
+@keyframes explode {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0);
+        opacity: 0;
+    }
+}
+
+.rocket {
+    position: absolute;
+    bottom: 0;
+    width: 4px;
+    height: 20px;
+    background: linear-gradient(to top, #ffeb3b, #ff5722);
+    border-radius: 2px 2px 0 0;
+    opacity: 0;
+    animation: launch 1.5s ease-in forwards;
+}
+
+@keyframes launch {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    80% {
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-80vh); /* Altura de explosión */
+        opacity: 0;
+    }
+}
+
+.message-container {
+    position: absolute;
+    top: 50%; /* Centered vertically */
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centered both horizontally and vertically */
+    /* Use clamp for responsive font size: min size, preferred size (vw), max size */
+    font-size: clamp(2rem, 8vw, 6rem); /* Example: 2rem min, 8vw preferred, 6rem max */
+    color: #fff;
+    text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700, 0 0 30px #ff8c00;
+    z-index: 10;
+    white-space: nowrap; /* Ensures text stays on one line */
+    text-align: center; /* Ensures content within the container is centered */
+    padding: 0 10px; /* Small padding to prevent text touching screen edges on very small screens */
+}
+
+.message-container span {
+    opacity: 0;
+    display: inline-block; /* For animating transform */
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out; /* Acelerado */
+    margin: 0 0.05em; /* Pequeño espacio entre letras */
+}
+
+.message-container span.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+.message-container span.initial { /* Estado inicial antes de la animación */
+    transform: translateY(20px) scale(0.8);
+}
+
+/* Estrellas parpadeantes */
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: 0 0 5px white, 0 0 10px white;
+    animation: twinkle 2s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+/* Specific media queries for font size if clamp() isn't sufficient */
+@media (max-width: 768px) {
+    .message-container {
+        /* You can override clamp or fine-tune if needed */
+        /* font-size: 7vw; */
+    }
+    .message-container span {
+        margin: 0 0.03em; /* Reduce spacing slightly on smaller screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .message-container {
+        /* font-size: 10vw; */
+    }
+}
