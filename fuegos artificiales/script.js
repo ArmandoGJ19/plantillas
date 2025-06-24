@@ -1,3 +1,4 @@
+
 const canvas = document.getElementById('fireworksCanvas');
 const ctx = canvas.getContext('2d');
 const restartButton = document.getElementById('restartButton');
@@ -7,14 +8,32 @@ let canvasHeight = window.innerHeight;
 canvas.width = canvasWidth;
 canvas.height = canvasHeight;
 
-const TEXT_TO_FORM = "Diana";
-let TEXT_FONT_SIZE = Math.min(100, canvasWidth / (TEXT_TO_FORM.length * 0.8));
+// --- ZONA DE MODIFICACIÓN PRINCIPAL ---
+
+// MODIFICAR: El texto que se formará con partículas.
+const TEXT_TO_FORM = "Felicidades";
+// MODIFICAR: Velocidad a la que las partículas viajan para formar el texto.
 const TEXT_PARTICLE_SPEED = 2.5;
+// MODIFICAR: Cuánto tiempo (en fotogramas, ~60 por segundo) permanece el texto visible antes de desaparecer.
 const TEXT_PARTICLE_LIFESPAN_AT_TARGET = 500;
+// MODIFICAR: Retraso inicial (en milisegundos) antes de que comience la formación del texto.
 const TEXT_FORMATION_DELAY = 1000;
+// MODIFICAR: Retraso (en milisegundos) DESPUÉS de la formación del texto, antes de que empiecen los fuegos artificiales.
 const RANDOM_FIREWORKS_DELAY = 4000;
+// MODIFICAR: El número total de fuegos artificiales que se lanzarán en la secuencia final.
 const NUM_RANDOM_FIREWORKS = 12;
+// MODIFICAR: El intervalo de tiempo (en milisegundos) entre cada lanzamiento de la secuencia final.
 const RANDOM_FIREWORK_LAUNCH_INTERVAL = 500;
+
+// MODIFICAR: La paleta de colores para los fuegos artificiales y el texto.
+const fireworkColors = [
+    '#FF5252', '#FF4081', '#E040FB', '#7C4DFF', '#536DFE',
+    '#448AFF', '#40C4FF', '#18FFFF', '#64FFDA', '#69F0AE',
+    '#B2FF59', '#EEFF41', '#FFFF00', '#FFD740', '#FFAB40', '#FF6E40'
+];
+
+// --- FIN DE LA ZONA DE MODIFICACIÓN ---
+
 
 let textParticles = [];
 let randomFireworks = [];
@@ -23,12 +42,6 @@ let textFormationStarted = false;
 let randomFireworksStarted = false;
 let randomFireworksLaunched = 0;
 let fireworkLaunchTimeout;
-
-const fireworkColors = [
-    '#FF5252', '#FF4081', '#E040FB', '#7C4DFF', '#536DFE',
-    '#448AFF', '#40C4FF', '#18FFFF', '#64FFDA', '#69F0AE',
-    '#B2FF59', '#EEFF41', '#FFFF00', '#FFD740', '#FFAB40', '#FF6E40'
-];
 
 function getRandomColor() {
     return fireworkColors[Math.floor(Math.random() * fireworkColors.length)];
@@ -57,6 +70,7 @@ class Particle {
             const speed = Math.random() * 3 + 1;
             this.vx = Math.cos(angle) * speed;
             this.vy = Math.sin(angle) * speed;
+            // MODIFICAR: La fuerza de gravedad que afecta a las partículas de la explosión.
             this.gravity = 0.05;
             this.alpha = 1;
         }
@@ -104,7 +118,6 @@ class Particle {
 }
 
 class Firework {
-
     constructor() {
         this.x = Math.random() * canvasWidth;
         this.y = canvasHeight;
@@ -129,6 +142,7 @@ class Firework {
     }
     explode() {
         this.exploded = true;
+        // MODIFICAR: Cantidad de partículas por explosión. '50' es la base, '* 50' es el rango.
         const numParticles = 50 + Math.random() * 50;
         for (let i = 0; i < numParticles; i++) {
             this.particles.push(new Particle(this.x, this.y, null, null, this.color, Math.random() * 2 + 1));
@@ -147,7 +161,7 @@ class Firework {
 }
 
 function getTextPoints() {
-
+    let TEXT_FONT_SIZE = Math.min(100, canvasWidth / (TEXT_TO_FORM.length * 0.8));
     const tempCanvas = document.createElement('canvas');
     const tempCtx = tempCanvas.getContext('2d');
     tempCanvas.width = canvasWidth;
@@ -160,6 +174,7 @@ function getTextPoints() {
     const imageData = tempCtx.getImageData(0, 0, canvasWidth, canvasHeight);
     const data = imageData.data;
     const points = [];
+    // MODIFICAR: Densidad de las partículas del texto. Un número más bajo (ej: 1) crea un texto más denso y nítido.
     const sampling = Math.max(2, Math.floor(TEXT_FONT_SIZE / 20));
     for (let y = 0; y < canvasHeight; y += sampling) {
         for (let x = 0; x < canvasWidth; x += sampling) {
@@ -173,12 +188,8 @@ function getTextPoints() {
 }
 
 function initTextParticles() {
-
     textTargetPoints = getTextPoints();
-    if (textTargetPoints.length === 0) {
-        console.warn("No se pudieron obtener puntos del texto.");
-        return;
-    }
+    if (textTargetPoints.length === 0) return;
     textTargetPoints.forEach(point => {
         let startX, startY;
         const side = Math.floor(Math.random() * 4);
@@ -201,23 +212,25 @@ function launchRandomFirework() {
 }
 
 function animate() {
+    // MODIFICAR: El efecto de estela. Un valor más bajo (ej: 0.05) deja estelas más largas.
     ctx.fillStyle = 'rgba(10, 10, 26, 0.1)';
     ctx.fillRect(0, 0, canvasWidth, canvasHeight);
+
     if (textFormationStarted) {
         textParticles.forEach(p => { p.update(); p.draw(); });
         textParticles = textParticles.filter(p => p.lifespan > 0);
     }
+
     if (randomFireworksStarted) {
         randomFireworks.forEach(fw => { fw.update(); fw.draw(); });
         randomFireworks = randomFireworks.filter(fw => !fw.exploded || fw.particles.length > 0);
     }
+
     requestAnimationFrame(animate);
 }
 
 function resetAndStartAnimation() {
-
     clearTimeout(fireworkLaunchTimeout);
-
     textFormationStarted = false;
     randomFireworksStarted = false;
     textParticles = [];
@@ -237,16 +250,12 @@ function resetAndStartAnimation() {
 
 let resizeTimer;
 window.addEventListener('resize', () => {
-
     clearTimeout(resizeTimer);
     resizeTimer = setTimeout(() => {
         canvasWidth = window.innerWidth;
         canvasHeight = window.innerHeight;
         canvas.width = canvasWidth;
         canvas.height = canvasHeight;
-
-
-        TEXT_FONT_SIZE = Math.min(100, canvasWidth / (TEXT_TO_FORM.length * 0.8));
         resetAndStartAnimation();
     }, 250);
 });
@@ -255,3 +264,4 @@ restartButton.addEventListener('click', resetAndStartAnimation);
 
 resetAndStartAnimation();
 animate();
+                            

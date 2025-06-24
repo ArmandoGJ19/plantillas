@@ -1,40 +1,38 @@
-/* ================================================= */
-/* CAMBIO: BASE MÁS ROBUSTA PARA EVITAR SCROLL       */
-/* ================================================= */
+
 html, body {
     height: 100%;
     width: 100%;
     margin: 0;
     padding: 0;
-    overflow: hidden; /* La clave para eliminar las barras de scroll */
+    overflow: hidden;
+    /* MODIFICAR: El color de fondo si el canvas no lo cubre por completo. */
     background-color: #000;
 }
 
-/* El body ya no necesita flexbox ni altura específica */
 body {
-    position: relative; /* Contexto para el botón posicionado absolutamente */
+    position: relative;
 }
 
-/* ================================================= */
-/* CAMBIO: POSICIONAR EL CANVAS COMO UN FONDO FIJO   */
-/* ================================================= */
 #fireworksCanvas {
     position: absolute;
     top: 0;
     left: 0;
     display: block;
+    /* MODIFICAR: El color de fondo principal del canvas (el cielo). */
     background-color: #0a0a1a;
 }
 
-/* Estilo del botón (mantenemos el estilo mejorado anterior) */
 #restartButton {
     position: absolute;
-    z-index: 10; /* Aseguramos que el botón esté sobre el canvas */
+    z-index: 10;
     top: 20px;
     right: 20px;
     padding: 12px 25px;
+    /* MODIFICAR: Color de fondo del botón. */
     background-color: #2c3e50;
+    /* MODIFICAR: Color del texto del botón. */
     color: #ecf0f1;
+    /* MODIFICAR: Color y grosor del borde del botón. */
     border: 2px solid #3498db;
     border-radius: 50px;
     cursor: pointer;
@@ -42,20 +40,24 @@ body {
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 1px;
+    /* MODIFICAR: El color del brillo/sombra del botón. */
     box-shadow: 0 0 10px rgba(52, 152, 219, 0.5),
     0 0 20px rgba(52, 152, 219, 0.3);
     transition: all 0.3s ease-in-out;
 }
 
 #restartButton:hover {
+    /* MODIFICAR: Color de fondo del botón al pasar el ratón por encima. */
     background-color: #3498db;
+    /* MODIFICAR: Color del texto del botón al pasar el ratón por encima. */
     color: #fff;
     transform: scale(1.05);
+    /* MODIFICAR: El color del brillo/sombra al pasar el ratón por encima. */
     box-shadow: 0 0 15px rgba(52, 152, 219, 0.8),
     0 0 30px rgba(52, 152, 219, 0.5);
 }
 
-/* Ajuste responsivo para pantallas pequeñas */
+/* Ajustes para pantallas pequeñas. */
 @media (max-width: 480px) {
     #restartButton {
         top: 15px;
@@ -64,3 +66,4 @@ body {
         font-size: 14px;
     }
 }
+                            

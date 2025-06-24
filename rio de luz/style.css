@@ -1,7 +1,9 @@
+
 body {
     margin: 0;
     overflow: hidden;
-    background-color: #050510; /* Un fondo oscuro casi negro */
+    /* MODIFICAR: Color de fondo de la página. */
+    background-color: #050510;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,3 +13,4 @@ body {
 canvas {
     display: block;
 }
+                            
