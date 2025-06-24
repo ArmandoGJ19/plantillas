@@ -1,44 +1,49 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive Spider Web</title>
+  <!-- MODIFICAR: Título de la pestaña del navegador -->
+  <title>Telaraña Interactiva</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div class="text-container" id="textContainer">
-  <h1>Interactive Spider Web</h1>
-  <p>Move your cursor to create an intricate spider web animation.</p>
+  <!-- MODIFICAR: Texto del título principal -->
+  <h1>Telaraña Interactiva</h1>
+  <!-- MODIFICAR: Texto del párrafo de descripción -->
+  <p>Mueve el cursor para tejer una telaraña animada.</p>
 </div>
 
+<!-- El resto del HTML gestiona el menú de configuración -->
 <div id="controls" class="controls-hidden">
-  <h2>Settings</h2>
+  <h2>Ajustes</h2>
   <div>
-    <label for="particleColor">Particle Color:</label>
+    <label for="particleColor">Color Partícula:</label>
     <input type="color" id="particleColor" value="#FFFFFF">
   </div>
   <div>
-    <label for="lineColor">Line Color:</label>
+    <label for="lineColor">Color Línea:</label>
     <input type="color" id="lineColor" value="#FFFFFF">
   </div>
   <div>
-    <label for="bgColor">Background Color:</label>
+    <label for="bgColor">Color Fondo:</label>
     <input type="color" id="bgColor" value="#1a1a1a">
   </div>
   <div>
-    <label for="maxParticles">Max Particles:</label>
+    <label for="maxParticles">Máx. Partículas:</label>
     <input type="number" id="maxParticles" value="150" min="50" max="1000" step="10">
   </div>
   <div>
-    <label for="connectDistance">Connect Distance:</label>
+    <label for="connectDistance">Dist. Conexión:</label>
     <input type="number" id="connectDistance" value="100" min="20" max="100" step="10">
   </div>
   <div>
-    <label for="particleRadius">Particle Radius:</label>
+    <label for="particleRadius">Radio Partícula:</label>
     <input type="number" id="particleRadius" value="2" min="1" max="10" step="0.5">
   </div>
-  <button id="resetParticles">Reset Particles</button>
+  <button id="resetParticles">Reiniciar Partículas</button>
 </div>
 
 <button id="toggleControls">⚙️</button>
@@ -47,3 +52,4 @@
 <script src="script.js"></script>
 </body>
 </html>
+                            

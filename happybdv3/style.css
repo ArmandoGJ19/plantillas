@@ -1,13 +1,16 @@
+
 body {
     margin: 0;
     overflow: hidden;
+    /* MODIFICAR: Color de fondo. Es un degradado radial. */
     background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    position: relative; /* Para posicionar las estrellas */
-    font-family: 'Arial', cursive, sans-serif; /* Moved font-family here for global consistency */
+    position: relative;
+    /* MODIFICAR: Fuente principal para el texto del mensaje. */
+    font-family: 'Arial', cursive, sans-serif;
 }
 
 .fireworks-container {
@@ -16,36 +19,23 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    pointer-events: none; /* Para que no interfiera con otros elementos si los hubiera */
+    pointer-events: none;
 }
 
 .particle {
     position: absolute;
-    background-color: #fff; /* Color base, se cambiará con JS */
     border-radius: 50%;
     opacity: 1;
     transform-origin: center center;
-    /* Removed animation: explode here as it's handled by JS for more control */
-}
-
-/* @keyframes explode is no longer strictly needed if particle movement is fully JS controlled */
-/* But it's good to keep if you ever revert to CSS only particle animation */
-@keyframes explode {
-    0% {
-        transform: scale(1);
-        opacity: 1;
-    }
-    100% {
-        transform: scale(0);
-        opacity: 0;
-    }
 }
 
 .rocket {
     position: absolute;
     bottom: 0;
+    /* MODIFICAR: Ancho y alto del cohete que sube. */
     width: 4px;
     height: 20px;
+    /* MODIFICAR: Color del cohete (es un degradado). */
     background: linear-gradient(to top, #ffeb3b, #ff5722);
     border-radius: 2px 2px 0 0;
     opacity: 0;
@@ -61,31 +51,34 @@ body {
         opacity: 1;
     }
     100% {
-        transform: translateY(-80vh); /* Altura de explosión */
+        /* MODIFICAR: Altura a la que explota el cohete. Un valor más alto (ej: -90vh) lo hará subir más. */
+        transform: translateY(-80vh);
         opacity: 0;
     }
 }
 
 .message-container {
     position: absolute;
-    top: 50%; /* Centered vertically */
+    top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%); /* Centered both horizontally and vertically */
-    /* Use clamp for responsive font size: min size, preferred size (vw), max size */
-    font-size: clamp(2rem, 8vw, 6rem); /* Example: 2rem min, 8vw preferred, 6rem max */
+    transform: translate(-50%, -50%);
+    /* MODIFICAR: Tamaño del texto. clamp(mínimo, preferido, máximo). */
+    font-size: clamp(2rem, 8vw, 6rem);
+    /* MODIFICAR: Color principal de las letras del mensaje. */
     color: #fff;
+    /* MODIFICAR: Efecto de brillo del texto. Puedes añadir o cambiar colores y desenfoque. */
     text-shadow: 0 0 10px #ffd700, 0 0 20px #ffd700, 0 0 30px #ff8c00;
     z-index: 10;
-    white-space: nowrap; /* Ensures text stays on one line */
-    text-align: center; /* Ensures content within the container is centered */
-    padding: 0 10px; /* Small padding to prevent text touching screen edges on very small screens */
+    white-space: nowrap;
+    text-align: center;
+    padding: 0 10px;
 }
 
 .message-container span {
     opacity: 0;
-    display: inline-block; /* For animating transform */
-    transition: opacity 0.2s ease-out, transform 0.2s ease-out; /* Acelerado */
-    margin: 0 0.05em; /* Pequeño espacio entre letras */
+    display: inline-block;
+    transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+    margin: 0 0.05em;
 }
 
 .message-container span.visible {
@@ -93,39 +86,30 @@ body {
     transform: translateY(0) scale(1);
 }
 
-.message-container span.initial { /* Estado inicial antes de la animación */
+.message-container span.initial {
     transform: translateY(20px) scale(0.8);
 }
 
-/* Estrellas parpadeantes */
 .star {
     position: absolute;
+    /* MODIFICAR: Tamaño de las estrellas de fondo. */
     width: 2px;
     height: 2px;
+    /* MODIFICAR: Color y brillo de las estrellas. */
     background-color: white;
-    border-radius: 50%;
     box-shadow: 0 0 5px white, 0 0 10px white;
+    border-radius: 50%;
     animation: twinkle 2s infinite ease-in-out;
 }
 
 @keyframes twinkle {
-    0%, 100% { opacity: 0.3; }
-    50% { opacity: 1; }
-}
-
-/* Specific media queries for font size if clamp() isn't sufficient */
-@media (max-width: 768px) {
-    .message-container {
-        /* You can override clamp or fine-tune if needed */
-        /* font-size: 7vw; */
+    0%, 100% {
+        /* MODIFICAR: Opacidad mínima de las estrellas (qué tan tenues se ponen). */
+        opacity: 0.3;
     }
-    .message-container span {
-        margin: 0 0.03em; /* Reduce spacing slightly on smaller screens */
+    50% {
+        /* MODIFICAR: Opacidad máxima de las estrellas (qué tan brillantes se ponen). */
+        opacity: 1;
     }
 }
-
-@media (max-width: 480px) {
-    .message-container {
-        /* font-size: 10vw; */
-    }
-}
+                            

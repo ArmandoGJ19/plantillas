@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -5,16 +6,16 @@
 }
 
 body {
+    /* MODIFICAR: El degradado de fondo de toda la página. */
     background: linear-gradient(135deg, #0c0c2e 0%, #1a1a3e 50%, #2d1b69 100%);
     overflow: hidden;
     font-family: 'Arial Black', Arial, sans-serif;
-    /* Comienzo de cambios para diseño responsivo: */
-    font-size: 16px; /* Base font size for rem units */
-    /* Fin de cambios */
+    font-size: 16px;
 }
 
 canvas {
     display: block;
+    /* MODIFICAR: Este es un brillo radial en la parte inferior del canvas. */
     background: radial-gradient(circle at 50% 100%, rgba(20, 20, 60, 0.8) 0%, transparent 50%);
 }
 
@@ -24,10 +25,11 @@ canvas {
     left: 50%;
     transform: translate(-50%, -50%);
     color: transparent;
+    /* MODIFICAR: Tamaño de la fuente del mensaje principal. */
     font-size: 4rem;
     font-weight: bold;
     text-align: center;
-    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8);
+    /* MODIFICAR: El degradado de colores para el texto. Añade o quita colores aquí. */
     background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1, #96ceb4, #ffeaa7, #dda0dd);
     background-size: 400% 400%;
     -webkit-background-clip: text;
@@ -35,15 +37,13 @@ canvas {
     animation: rainbow 3s ease-in-out infinite, glow 2s ease-in-out infinite alternate;
     opacity: 0;
     z-index: 10;
-    /* Comienzo de cambios para diseño responsivo: */
-    width: 90%; /* Prevents text overflow on small screens */
-    line-height: 1.2; /* Better readability */
-    /* Fin de cambios */
+    width: 90%;
+    line-height: 1.2;
 }
 
 .message.show {
     opacity: 1;
-    animation: rainbow 3s ease-in-out infinite, glow 2s ease-in-out infinite alternate, fadeIn 2s ease-in forwards; /* Added forwards to keep state after animation */
+    animation: rainbow 3s ease-in-out infinite, glow 2s ease-in-out infinite alternate, fadeIn 2s ease-in forwards;
 }
 
 @keyframes rainbow {
@@ -52,6 +52,7 @@ canvas {
 }
 
 @keyframes glow {
+    /* MODIFICAR: El efecto de brillo del texto. Puedes cambiar los colores y la intensidad del desenfoque. */
     from {
         text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 40px rgba(255, 255, 255, 0.6);
     }
@@ -61,7 +62,7 @@ canvas {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); } /* Adjusted initial scale for smoother entry */
+    from { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
     to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
 }
 
@@ -76,8 +77,10 @@ canvas {
 
 .star {
     position: absolute;
+    /* MODIFICAR: Tamaño de las estrellas en el fondo. */
     width: 2px;
     height: 2px;
+    /* MODIFICAR: Color de las estrellas. */
     background: white;
     border-radius: 50%;
     animation: twinkle 2s ease-in-out infinite alternate;
@@ -90,22 +93,18 @@ canvas {
 
 .confetti {
     position: absolute;
+    /* MODIFICAR: Tamaño de los trozos de confeti. */
     width: 8px;
     height: 8px;
-    background: #ff6b6b; /* Default, overridden by JS */
-    animation: confetti-fall 3s ease-in forwards; /* Added forwards to keep state */
-    pointer-events: none; /* Allows clicks/touches to pass through */
+    background: #ff6b6b;
+    /* MODIFICAR: Duración de la caída del confeti (ej: 3s = 3 segundos). */
+    animation: confetti-fall 3s ease-in forwards;
+    pointer-events: none;
 }
 
 @keyframes confetti-fall {
-    0% {
-        transform: translateY(-100vh) rotateZ(0deg);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(100vh) rotateZ(720deg);
-        opacity: 0;
-    }
+    0% { transform: translateY(-100vh) rotateZ(0deg); opacity: 1; }
+    100% { transform: translateY(100vh) rotateZ(720deg); opacity: 0; }
 }
 
 .launch-button {
@@ -113,6 +112,7 @@ canvas {
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
+    /* MODIFICAR: El degradado de color del botón. */
     background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
     color: white;
     border: none;
@@ -124,7 +124,7 @@ canvas {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
     z-index: 20;
-    white-space: nowrap; /* Prevents text from wrapping */
+    white-space: nowrap;
 }
 
 .launch-button:hover {
@@ -132,55 +132,23 @@ canvas {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
 }
 
-/* Comienzo de cambios para diseño responsivo */
+/* Las reglas @media ajustan el diseño para diferentes tamaños de pantalla. */
 @media (max-width: 1024px) {
-    .message {
-        font-size: 3.5rem;
-    }
-    .launch-button {
-        padding: 12px 25px;
-        font-size: 1.1rem;
-    }
+    .message { font-size: 3.5rem; }
+    .launch-button { padding: 12px 25px; font-size: 1.1rem; }
 }
-
 @media (max-width: 768px) {
-    .message {
-        font-size: 2.8rem; /* Ajuste para tablets verticales y móviles grandes */
-    }
-    .launch-button {
-        padding: 10px 20px;
-        font-size: 1rem;
-        bottom: 15px; /* Ligeramente más cerca del borde */
-    }
+    .message { font-size: 2.8rem; }
+    .launch-button { padding: 10px 20px; font-size: 1rem; bottom: 15px; }
 }
-
 @media (max-width: 480px) {
-    .message {
-        font-size: 2rem; /* Ajuste para móviles pequeños */
-        padding: 0 10px; /* Añade un poco de padding para que el texto no toque los bordes */
-    }
-    .launch-button {
-        padding: 8px 15px;
-        font-size: 0.9rem;
-        bottom: 10px; /* Más cerca del borde */
-    }
-    .star {
-        width: 1px;
-        height: 1px; /* Estrellas más pequeñas */
-    }
-    .confetti {
-        width: 6px;
-        height: 6px; /* Confeti más pequeño */
-    }
+    .message { font-size: 2rem; padding: 0 10px; }
+    .launch-button { padding: 8px 15px; font-size: 0.9rem; bottom: 10px; }
+    .star { width: 1px; height: 1px; }
+    .confetti { width: 6px; height: 6px; }
 }
-
 @media (max-width: 320px) {
-    .message {
-        font-size: 1.5rem; /* Ajuste para los dispositivos más pequeños */
-    }
-    .launch-button {
-        font-size: 0.8rem;
-        padding: 6px 10px;
-    }
+    .message { font-size: 1.5rem; }
+    .launch-button { font-size: 0.8rem; padding: 6px 10px; }
 }
-/* Fin de cambios */
+                            
