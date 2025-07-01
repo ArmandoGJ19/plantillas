@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carta con Corazón de Neón</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="stars-bg"></div>
+
+<div class="container">
+    <div class="letter">
+        <pre id="letter-content"></pre>
+    </div>
+    <div class="heart-container">
+        <svg class="heart" viewBox="0 0 200 200">
+
+            <g id="heart-shape-group">
+                <path class="heart-glow" d="M 100,60 C 80,20 40,30 40,60 C 40,90 100,140 100,140 C 100,140 160,90 160,60 C 160,30 120,20 100,60 Z" />
+                <path id="heart-path" class="heart-path" d="M 100,60 C 80,20 40,30 40,60 C 40,90 100,140 100,140 C 100,140 160,90 160,60 C 160,30 120,20 100,60 Z" />
+            </g>
+
+            <path id="arrow-motion-path" d="M 20,-20 L 180,220" fill="none" stroke="none" />
+
+            <g id="arrow-group">
+                <path class="arrow-path" d="M -30,0 L 15,0 M 5,-5 L 15,0 L 5,5" />
+            </g>
+            <!--            MODIFICAR: Nombre de la persona -->
+            <text id="heart-text" x="100" y="95" text-anchor="middle" dominant-baseline="middle">
+                Su nombre :)
+            </text>
+        </svg>
+    </div>
+</div>
+<script src="script.js"></script>
+
+</body>
+</html>
